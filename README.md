@@ -46,7 +46,8 @@ Recommended settings
 	Access the settings by clicking on the Playnite icon shaped like a controller, at the top left.
 	Select "Settings."
 
-	Go to the "Metadata" tab and choose "PSN Store" in the settings for "Covers" and "Background Image." For other elements, 	choose 	the metadata source that suits you.
+	Go to the "Metadata" tab and choose "PSN Store" in the settings for "Covers" and "Background Image." For other elements,
+ 	choose the metadata source that suits you.
 
 	Next, go to the "Appearance/Grid view" and set the "Target aspect ratio" to 1:1.
 
