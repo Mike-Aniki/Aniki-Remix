@@ -1,4 +1,5 @@
 # Aniki-Remix
+___________________________________________________________________________
 Fullscreen Theme for Playnite
 
 ![screenshot01](https://github.com/Mike-Aniki/Aniki-Remix/assets/159768785/96c3d2d0-9b73-4580-8b4c-a635ad83c5e5)
@@ -18,6 +19,7 @@ Before you begin, make sure to have the following Add-on installed for an optima
 
 To download them, go to settings by clicking on the Playnite icon shaped like a controller, located at the top left. Then, select "Add-on" and go to the "Browse" tab at the bottom to search for the extensions.
 
+___________________________________________________________________________
 
 Recommended extensions:
 
@@ -45,7 +47,7 @@ Recommended settings:
 	Access the settings by clicking on the Playnite icon shaped like a controller, at the top left.
 	Select "Settings."
 
-	Go to the "Metadata" tab and choose "PSN Store" in the settings for "Covers" and "Background Image." For other elements, choose 	the metadata source that suits you.
+	Go to the "Metadata" tab and choose "PSN Store" in the settings for "Covers" and "Background Image." For other elements, 	choose 	the metadata source that suits you.
 
 	Next, go to the "Appearance/Grid view" and set the "Target aspect ratio" to 1:1.
 
@@ -58,8 +60,8 @@ Recommended settings:
 	Go to "Add-on/Generic/Extra Metadata Loader/Logo Settings."
 	In the "logo loader" settings, set the following values:
 
-  Maximum Width: 600
-  Maximum Height: 320
+ 	 Maximum Width: 600
+	 Maximum Height: 320
 
 	In Full-Screen Mode:
 
