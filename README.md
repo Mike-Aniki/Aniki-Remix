@@ -1,5 +1,4 @@
 # Aniki-Remix
-___________________________________________________________________________
 Fullscreen Theme for Playnite
 
 ![screenshot01](https://github.com/Mike-Aniki/Aniki-Remix/assets/159768785/96c3d2d0-9b73-4580-8b4c-a635ad83c5e5)
@@ -21,7 +20,7 @@ To download them, go to settings by clicking on the Playnite icon shaped like a 
 
 ___________________________________________________________________________
 
-Recommended extensions:
+Recommended extensions
 
 	Generic:
 
@@ -38,7 +37,7 @@ Recommended extensions:
 
 ___________________________________________________________________________
 
-Recommended settings:
+Recommended settings
 
 	In Desktop Mode:
 
