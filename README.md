@@ -3,7 +3,7 @@ Fullscreen Theme for Playnite
 
 ![screenshot01](https://github.com/Mike-Aniki/Aniki-Remix/assets/159768785/96c3d2d0-9b73-4580-8b4c-a635ad83c5e5)
 ![screenshot02](https://github.com/Mike-Aniki/Aniki-Remix/assets/159768785/2e4dba4c-b904-422f-88fd-9e8f0ada6494)
-
+___________________________________________________________________________
 To fully enjoy this theme, please follow the configuration instructions in Playnite:
 
 In the theme folder, you'll find a folder called "Theme Option". You can change the theme design (with or without trailers, etc...), simply by copying the "view" folder (from the corresponding zip file) into the main theme directory.
