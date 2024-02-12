@@ -11,16 +11,16 @@ Packages:
     ReleaseDate: 2024-02-12
     PackageUrl: https://github.com/Mike-Aniki/Aniki-Remix/releases/download/v1.3/Aniki_Remix_df9e4536-addb-46a6-9a2c-4550c7cff461_1_3.pthm
     Changelog:
-      -Adjustment of Text alignment in detail view.
-      -Readme.txt added to theme folder for instructions.
-      -Adjustment of filter icons at the bottom of the screen.
-      -Fixed a problem where the grid view was displaying the source icon and filter name in the middle of the screen.
-      -Adjusted the source icon so that it was in the same place on all views.
-      -Addition of a detail view without trailer.
-      -Added a "theme option" folder to choose between the 2 detail views.
+      - Adjustment of Text alignment in detail view.
+      - Readme.txt added to theme folder for instructions.
+      - Adjustment of filter icons at the bottom of the screen.
+      - Fixed a problem where the grid view was displaying the source icon and filter name in the middle of the screen.
+      - Adjusted the source icon so that it was in the same place on all views.
+      - Addition of a detail view without trailer.
+      - Added a "theme option" folder to choose between the 2 detail views.
   - Version: 1.4
     RequiredApiVersion: 2.5.0
     ReleaseDate: 2024-02-12
     PackageUrl: https://github.com/Mike-Aniki/Aniki-Remix/releases/download/v1.4/Aniki_Remix_df9e4536-addb-46a6-9a2c-4550c7cff461_1_4.pthm
     Changelog:
-      -Added different variations to the "Theme Option" folder, including variations without the source icon.
+      - Added different variations to the "Theme Option" folder, including variations without the source icon.
