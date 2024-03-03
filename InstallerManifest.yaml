@@ -31,7 +31,7 @@ Packages:
     Changelog:
       - Fixed the slider that wasn't displaying in the settings.
       - Added several variants for the home screen (in the Theme Option folder).
-        - Version: 1.6
+  - Version: 1.6
     RequiredApiVersion: 2.5.0
     ReleaseDate: 2024-03-03
     PackageUrl: https://github.com/Mike-Aniki/Aniki-Remix/releases/download/v1.6/Aniki_Remix_df9e4536-addb-46a6-9a2c-4550c7cff461_1_6.pthm
