@@ -31,3 +31,20 @@ Packages:
     Changelog:
       - Fixed the slider that wasn't displaying in the settings.
       - Added several variants for the home screen (in the Theme Option folder).
+        - Version: 1.6
+    RequiredApiVersion: 2.5.0
+    ReleaseDate: 2024-02-18
+    PackageUrl: https://github.com/Mike-Aniki/Aniki-Remix/releases/download/v1.5/Aniki_Remix_df9e4536-addb-46a6-9a2c-4550c7cff461_1_6.pthm
+    Changelog:
+      - Avatar icon added in place of settings icon.
+      - Addition of an intro video.
+      - Redesigned options menu.
+      - Correction of a duplication problem in the theme option file.
+      - Adjustment of source icon.
+      - Steam banner background option added.
+      - Font changed. 
+      - New icon for view change button & battery.
+      - Redesigned options menu.
+      - Button color changed.
+      - Changed selection border color + added dynamic effect.
+      - Added a .png file for the bar at the bottom of the screen, allowing you to change the color of the bar.
