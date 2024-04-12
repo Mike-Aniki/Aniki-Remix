@@ -43,8 +43,18 @@ Packages:
       - Adjustment of source icon.
       - Steam banner background option added.
       - Font changed. 
-      - New icon for view change button & battery.
-      - Redesigned options menu.
-      - Button color changed.
-      - Changed selection border color + added dynamic effect.
-      - Added a .png file for the bar at the bottom of the screen, allowing you to change the color of the bar.
+  - Version: 1.7
+    RequiredApiVersion: 2.5.0
+    ReleaseDate: 2024-04-12
+    PackageUrl: https://github.com/Mike-Aniki/Aniki-Remix/releases/download/v1.7/Aniki_Remix_df9e4536-addb-46a6-9a2c-4550c7cff461_1_7.pthm
+    Changelog:
+      - Readjusting the screen shadow 
+      - Fixed a problem where battery icons were not superimposed correctly
+      - Fixed a problem where the rating images displayed the movie rating instead of the games image
+      - Added the clock
+      - Add a configuration message when launching the theme
+      - Integration of more options in the folder [.../ThemeOption/interface]
+      - Integration of main view with trailer 
+      - Added Logos Source
+      - Intro video changed
+      - New Logo 
