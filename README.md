@@ -31,16 +31,17 @@ Recommended extensions:
 
 	Generic:
 
-    		ExtraMetadataLoader
-    		ExtraMetadataLoader Fullscreen Helper
-    		How Long To Beat
-    		SuccessStory
-    		Splash Screen (optional)
-    		PlayniteSound (optional)
+		ExtraMetadataLoader (For Game Trailer and Logo)
+		ExtraMetadataLoader Fullscreen Helper (For ExtraMetada Works in Fullscreen mode)
+		How Long To Beat (To have enough time to finish the game)
+		SuccessStory (To get the game's achievements)
+		Splash Screen (To launch the game with a full-screen image)
+		PlayniteSound Mod by Ashpynov (To have personalized interface sounds + different music for each game)
 
-	Metadata Source:
+Metadata Source:
 
-   		Universal PSN Metadata
+		Universal PSN Metadata (To automatically download game covers in square format and wallpapers adapted to the theme with characters on the right of the screen)
+
 
 ___________________________________________________________________________
 
