@@ -58,3 +58,9 @@ Packages:
       - Added Logos Source
       - Intro video changed
       - New Logo 
+  - Version: 1.7.5
+    RequiredApiVersion: 2.6.0
+    ReleaseDate: 2024-07-14
+    PackageUrl: https://github.com/Mike-Aniki/Aniki-Remix/releases/download/v1.7.5/Aniki_Remix_df9e4536-addb-46a6-9a2c-4550c7cff461_1_7_5.pthm
+    Changelog:
+      - Integration of ThemeOptions addon
