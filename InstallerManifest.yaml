@@ -73,3 +73,9 @@ Packages:
       - Added localizations for ThemeOptions.
       - Adjusted "Trailer on main view" option, now trailer plays entirely.
       - Added a trophy page.
+  - Version: 1.8.1
+    RequiredApiVersion: 2.6.0
+    ReleaseDate: 2024-08-04
+    PackageUrl: https://github.com/Mike-Aniki/Aniki-Remix/releases/download/v1.8.1/Aniki_Remix_df9e4536-addb-46a6-9a2c-4550c7cff461_1_8_1.pthm
+    Changelog:
+      - Correction of a duplication problem in theme files.
