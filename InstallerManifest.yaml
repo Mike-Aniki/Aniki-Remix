@@ -79,3 +79,10 @@ Packages:
     PackageUrl: https://github.com/Mike-Aniki/Aniki-Remix/releases/download/v1.8.1/Aniki_Remix_df9e4536-addb-46a6-9a2c-4550c7cff461_1_8_1.pthm
     Changelog:
       - Correction of a duplication problem in theme files.
+  - Version: 1.8.2
+    RequiredApiVersion: 2.6.0
+    ReleaseDate: 2024-08-05
+    PackageUrl: https://github.com/Mike-Aniki/Aniki-Remix/releases/download/v1.8.2/Aniki_Remix_df9e4536-addb-46a6-9a2c-4550c7cff461_1_8_2.pthm
+    Changelog:
+      - Fixed problem with details page crashing playnite
+      - Trailer on main view now starts after intro
