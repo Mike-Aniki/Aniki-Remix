@@ -20,11 +20,14 @@ Theme Options addon Github : https://github.com/ashpynov/ThemeOptions
 ___________________________________________________________________________
 For filter icons to appear correctly, the filter name and icon.png name must match !
 
-	- To modify the icons (those located at the bottom of the screen), open: [Aniki Remix\Icons\Filter], choose and rename (or add) any .png with the name 	corresponding to your filters ( Filter: "my games" = "my games.png"). 
+- To modify the icons
+  (those located at the bottom of the screen), open: [Aniki Remix\Icons\Filter], choose and rename (or add) any .png with the name 	corresponding to your filters ( Filter: "my games" = "my games.png"). 
 
-	- For source icons (those located at the Top of the screen), the folder is [Aniki Remix\Icons\Source].
+- For source icons:
+   (those located at the Top of the screen), the folder is [Aniki Remix\Icons\Source].
 
-	- To modify menu navigation audio files, access the [Aniki Remix\Audio] folder. You must rename your file exactly as the file you wish to replace. To disable these sounds, rename or delete the audio files.
+- To modify menu navigation audio files
+   access the [Aniki Remix\Audio] folder. You must rename your file exactly as the file you wish to replace. To disable these sounds, rename or delete the audio files.
 
  ___________________________________________________________________________
 Before you begin, make sure to have the following Add-on installed for an optimal theme experience.
