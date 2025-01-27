@@ -1,4 +1,4 @@
-# End of updates for the Remix theme
+# End of updates for Aniki Remix
 
 Please note that the Aniki-Remix theme will no longer receive updates. However, it remains fully functional and you can continue to use it if you wish.
 
