@@ -80,4 +80,4 @@ Recommended settings:
 	In the "Layout" section, choose "8" for the number of columns and "25" for spacing to achieve a balanced appearance.
 ___________________________________________________________________________
 
-Enjoy your gaming experience!
+Enjoy your gaming experience
