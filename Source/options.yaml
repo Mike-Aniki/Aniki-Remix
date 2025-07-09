@@ -1,0 +1,145 @@
+Presets:
+
+    Home View:
+        Name: View Style
+        LocKey: LOCViewStyle
+        Presets:
+            Default:
+                Name: Default
+                LocKey: LOCDefault
+                Preview: Themes Option\1.Home\Preview\1.Default.png
+            SteamBanner:
+                Name: Steam Banner
+                LocKey: LOCSteamBanner
+                Preview: Themes Option\1.Home\Preview\2.Steam Banner.png
+                Files:
+                    - Themes Option\1.Home\2.Steam Banner\Views\Main.xaml
+                    - Themes Option\2.GameDetails\2.Steam Banner\Views\GameDetails.xaml
+            Trailer:
+                Name: Trailer on Main View
+                LocKey: LOCTrailerOnmainview
+                Preview: Themes Option\1.Home\Preview\3.Trailer.png
+                Files:
+                    - Themes Option\1.Home\3.Trailer\Views\Main.xaml
+    BottomBar:
+        Name: Filter Bar
+        LocKey: LOCBottomBar
+        Presets:
+            BottomBarDefault:
+                Name: Default Filter Bar
+                LocKey: LOCBottomBarDefault
+                Preview: Themes Option/3.Bottom Bar/Interface.png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Default: 1
+                        Value: 1
+            BottomBar2:
+                Name: Filter Bar 2
+                LocKey: LOCBottomBar2
+                Preview: Themes Option/3.Bottom Bar/Interface (2).png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Value: 2
+            BottomBar3:
+                Name: Filter Bar 3
+                LocKey: LOCBottomBar3
+                Preview: Themes Option/3.Bottom Bar/Interface (3).png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Value: 3
+            BottomBar4:
+                Name: Filter Bar 4
+                LocKey: LOCBottomBar4
+                Preview: Themes Option/3.Bottom Bar/Interface (4).png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Value: 4
+            BottomBar5:
+                Name: Filter Bar 5
+                LocKey: LOCBottomBar5
+                Preview: Themes Option/3.Bottom Bar/Interface (5).png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Value: 5
+            BottomBar6:
+                Name: Filter Bar 6
+                LocKey: LOCBottomBar6
+                Preview: Themes Option/3.Bottom Bar/Interface (6).png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Value: 6
+            BottomBar7:
+                Name: Filter Bar 7
+                LocKey: LOCBottomBar7
+                Preview: Themes Option/3.Bottom Bar/Interface (7).png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Value: 7
+            BottomBar8:
+                Name: Filter Bar 8
+                LocKey: LOCBottomBar8
+                Preview: Themes Option/3.Bottom Bar/Interface (8).png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Value: 8
+            BottomBar9:
+                Name: Filter Bar 9
+                LocKey: LOCBottomBar9
+                Preview: Themes Option/3.Bottom Bar/Interface (9).png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Value: 9
+            BottomBar10:
+                Name: Filter Bar 10
+                LocKey: LOCBottomBar10
+                Preview: Themes Option/3.Bottom Bar/Interface (10).png
+                Constants:
+                    BackgroundImageIndex: 
+                        Type: Int32
+                        Value: 10
+Variables:
+
+    SourceLogo:
+        Title: Source Logo on Main View
+        LocKey: LOCSourceLogoOnMainView
+        Type: Boolean
+        Default: True
+    SourceLogoDetails:
+        Title: Source Logo on Details View
+        LocKey: LOCSourceLogoOnDetailsView
+        Type: Boolean
+        Default: True
+    Genres:
+        Title: Game Genres on Main View
+        LocKey: LOCGenresNameOnMainView
+        Type: Boolean
+        Default: True
+    NameFilter:
+        Title: Filter Name on Main View
+        LocKey: LOCFilterNameOnMainView
+        Type: Boolean
+        Default: True
+    AgeRating:
+        Title: Age Rating on Main View
+        LocKey: LOCAgeRatingOnMainView
+        Type: Boolean
+        Default: True
+    TrailerDetails:
+        Title: Trailer on Details View
+        LocKey: LOCTrailerOnGameDetails
+        Type: Boolean
+        Default: True
+    CoverDetails:
+        Title: Game Cover on Details View
+        LocKey: LOCCoverOnGameDetails
+        Type: Boolean
+        Default: True

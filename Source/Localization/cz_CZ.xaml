@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+<sys:String x:Key="LOCViewStyle">Styl</sys:String>
+<sys:String x:Key="LOCDefault">Výchozí</sys:String>
+<sys:String x:Key="LOCSteamBanner">Banner Steam</sys:String>
+<sys:String x:Key="LOCTrailerOnmainview">Upoutávka na hlavní obrazovce</sys:String>
+<sys:String x:Key="LOCBottomBar">Filtrační lišta</sys:String>
+<sys:String x:Key="LOCBottomBarDefault">Výchozí filtrační lišta</sys:String>
+<sys:String x:Key="LOCBottomBar2">Filtrační lišta 2</sys:String>
+<sys:String x:Key="LOCBottomBar3">Filtrační lišta 3</sys:String>
+<sys:String x:Key="LOCBottomBar4">Filtrační lišta 4</sys:String>
+<sys:String x:Key="LOCBottomBar5">Filtrační lišta 5</sys:String>
+<sys:String x:Key="LOCBottomBar6">Filtrační lišta 6</sys:String>
+<sys:String x:Key="LOCBottomBar7">Filtrační lišta 7</sys:String>
+<sys:String x:Key="LOCBottomBar8">Filtrační lišta 8</sys:String>
+<sys:String x:Key="LOCBottomBar9">Filtrační lišta 9</sys:String>
+<sys:String x:Key="LOCBottomBar10">Filtrační lišta 10</sys:String>
+<sys:String x:Key="LOCSourceLogoOnMainView">Logo zdroje na hlavní obrazovce</sys:String>
+<sys:String x:Key="LOCSourceLogoOnDetailsView">Logo zdroje na obrazovce detailů</sys:String>
+<sys:String x:Key="LOCGenresNameOnMainView">Žánry hry na hlavní obrazovce</sys:String>
+<sys:String x:Key="LOCFilterNameOnMainView">Název filtru na hlavní obrazovce</sys:String>
+<sys:String x:Key="LOCAgeRatingOnMainView">Věkové hodnocení na hlavní obrazovce</sys:String>
+<sys:String x:Key="LOCTrailerOnGameDetails">Upoutávka na obrazovce detailů</sys:String>
+<sys:String x:Key="LOCCoverOnGameDetails">Obal hry na obrazovce detailů</sys:String>
+
+</ResourceDictionary>

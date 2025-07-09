@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+<sys:String x:Key="LOCViewStyle">Stil</sys:String>
+<sys:String x:Key="LOCDefault">Standard</sys:String>
+<sys:String x:Key="LOCSteamBanner">Steam-Banner</sys:String>
+<sys:String x:Key="LOCTrailerOnmainview">Trailer in der Hauptansicht</sys:String>
+<sys:String x:Key="LOCBottomBar">Filterleiste</sys:String>
+<sys:String x:Key="LOCBottomBarDefault">Standard-Filterleiste</sys:String>
+<sys:String x:Key="LOCBottomBar2">Filterleiste 2</sys:String>
+<sys:String x:Key="LOCBottomBar3">Filterleiste 3</sys:String>
+<sys:String x:Key="LOCBottomBar4">Filterleiste 4</sys:String>
+<sys:String x:Key="LOCBottomBar5">Filterleiste 5</sys:String>
+<sys:String x:Key="LOCBottomBar6">Filterleiste 6</sys:String>
+<sys:String x:Key="LOCBottomBar7">Filterleiste 7</sys:String>
+<sys:String x:Key="LOCBottomBar8">Filterleiste 8</sys:String>
+<sys:String x:Key="LOCBottomBar9">Filterleiste 9</sys:String>
+<sys:String x:Key="LOCBottomBar10">Filterleiste 10</sys:String>
+<sys:String x:Key="LOCSourceLogoOnMainView">Quell-Logo in der Hauptansicht</sys:String>
+<sys:String x:Key="LOCSourceLogoOnDetailsView">Quell-Logo in der Detailansicht</sys:String>
+<sys:String x:Key="LOCGenresNameOnMainView">Spielgenres in der Hauptansicht</sys:String>
+<sys:String x:Key="LOCFilterNameOnMainView">Filtername in der Hauptansicht</sys:String>
+<sys:String x:Key="LOCAgeRatingOnMainView">Altersfreigabe in der Hauptansicht</sys:String>
+<sys:String x:Key="LOCTrailerOnGameDetails">Trailer in der Detailansicht</sys:String>
+<sys:String x:Key="LOCCoverOnGameDetails">Spielcover in der Detailansicht</sys:String>
+
+</ResourceDictionary>

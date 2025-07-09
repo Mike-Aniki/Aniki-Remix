@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+<sys:String x:Key="LOCViewStyle">Style</sys:String>
+<sys:String x:Key="LOCDefault">Default</sys:String>
+<sys:String x:Key="LOCSteamBanner">Steam Banner</sys:String>
+<sys:String x:Key="LOCTrailerOnmainview">Trailer on Main View</sys:String>
+<sys:String x:Key="LOCBottomBar">Filter Bar</sys:String>
+<sys:String x:Key="LOCBottomBarDefault">Default Filter Bar</sys:String>
+<sys:String x:Key="LOCBottomBar2">Filter Bar 2</sys:String>
+<sys:String x:Key="LOCBottomBar3">Filter Bar 3</sys:String>
+<sys:String x:Key="LOCBottomBar4">Filter Bar 4</sys:String>
+<sys:String x:Key="LOCBottomBar5">Filter Bar 5</sys:String>
+<sys:String x:Key="LOCBottomBar6">Filter Bar 6</sys:String>
+<sys:String x:Key="LOCBottomBar7">Filter Bar 7</sys:String>
+<sys:String x:Key="LOCBottomBar8">Filter Bar 8</sys:String>
+<sys:String x:Key="LOCBottomBar9">Filter Bar 9</sys:String>
+<sys:String x:Key="LOCBottomBar10">Filter Bar 10</sys:String>
+<sys:String x:Key="LOCSourceLogoOnMainView">Source Logo on Main View</sys:String>
+<sys:String x:Key="LOCSourceLogoOnDetailsView">Source Logo on Details View</sys:String>
+<sys:String x:Key="LOCGenresNameOnMainView">Game Genres on Main View</sys:String>
+<sys:String x:Key="LOCFilterNameOnMainView">Filter Name on Main View</sys:String>
+<sys:String x:Key="LOCAgeRatingOnMainView">Age Rating on Main View</sys:String>
+<sys:String x:Key="LOCTrailerOnGameDetails">Trailer on Details View</sys:String>
+<sys:String x:Key="LOCCoverOnGameDetails">Game Cover on Details View</sys:String>
+
+</ResourceDictionary>

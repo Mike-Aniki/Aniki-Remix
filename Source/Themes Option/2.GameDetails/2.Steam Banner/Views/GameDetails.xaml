@@ -1,0 +1,2135 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+
+	<Style TargetType="{x:Type GameDetails}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type GameDetails}">
+
+					<Grid Background="{DynamicResource MainBackgourndBrush}"
+                          x:Name="PART_ViewHost"
+                          d:DesignWidth="{StaticResource DesignWidth}"
+                          d:DesignHeight="{StaticResource DesignHeight}"
+                          d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}"
+			  FocusManager.FocusedElement="{Binding ElementName=PART_ButtonContext}"
+			  Focusable="True"
+                          KeyboardNavigation.DirectionalNavigation="Contained"
+                          KeyboardNavigation.TabNavigation="Cycle"
+                          KeyboardNavigation.ControlTabNavigation="Cycle" >
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="80" />
+							<RowDefinition x:Name="DetailsRow" Height="*" />
+							<RowDefinition Height="100" />
+						</Grid.RowDefinitions>
+
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="80"/>
+						</Grid.ColumnDefinitions>
+
+						<Border x:Name="Overlay" Grid.RowSpan="3" Grid.ColumnSpan="3" RenderOptions.BitmapScalingMode="Fant" Panel.ZIndex="-48">
+							<Border.Style>
+								<Style TargetType="Border">
+									<Setter Property="Visibility" Value="Visible"/>
+									<Setter Property="Opacity" Value="1"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}" Value="True">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Border.Style>
+							<Border.Background>
+								<ImageBrush ImageSource="{ThemeFile 'Images/ShadeDetail.png'}" RenderOptions.BitmapScalingMode="Fant" Stretch="Fill"/>
+							</Border.Background>
+						</Border>
+
+						<Grid x:Name="MainBackgroundBlurGrid" Panel.ZIndex="-49" >
+							<Grid.Style>
+								<Style TargetType="Grid">
+									<Setter Property="Grid.RowSpan" Value="3"/>
+									<Setter Property="Grid.ColumnSpan" Value="3"/>
+									<Style.Triggers>
+
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+							<Grid Visibility="Visible">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="6*"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="6*"/>
+								</Grid.ColumnDefinitions>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="6*"/>
+									<RowDefinition Height="*"/>
+									<RowDefinition Height="6*"/>
+								</Grid.RowDefinitions>
+								<Grid RenderTransformOrigin="0.5,0.5" >
+									<Grid.Style>
+										<Style TargetType="Grid">
+											<Setter Property="Grid.Column" Value="1"/>
+											<Setter Property="Grid.Row" Value="1"/>
+											<Style.Triggers>
+
+											</Style.Triggers>
+										</Style>
+									</Grid.Style>
+									<Grid.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="30" ScaleY="30"/>
+											<SkewTransform/>
+											<RotateTransform />
+											<TranslateTransform/>
+										</TransformGroup>
+									</Grid.RenderTransform>
+									<FadeImage x:Name="Fade" Grid.Row="1" Grid.Column="1"
+							IsBlurEnabled="true" BlurAmount="{Binding ElementName=SizeGridBlur, Path=ActualHeight}"
+							RenderTransformOrigin="0.5,0.5" ImageDarkeningBrush="#FF000000" SourceUpdateDelay="50" >
+										<FadeImage.Style>
+											<Style TargetType="FadeImage">
+												<Setter Property="VerticalAlignment" Value="Stretch"/>
+												<Setter Property="HorizontalAlignment" Value="Stretch" />
+												<Setter Property="Source" Value="{Binding DisplayBackgroundImageObject}" />
+												<Setter Property="Stretch" Value="UniformToFill"/>
+												<Setter Property="RenderOptions.BitmapScalingMode" Value="LowQuality"/>
+												<Style.Triggers>
+
+
+												</Style.Triggers>
+											</Style>
+										</FadeImage.Style>
+										<FadeImage.RenderTransform>
+											<TransformGroup>
+												<ScaleTransform />
+												<SkewTransform  />
+												<RotateTransform />
+												<TranslateTransform/>
+											</TransformGroup>
+										</FadeImage.RenderTransform>
+									</FadeImage>
+								</Grid>
+								<Grid x:Name="SizeGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden" >
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="20*"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="20*"/>
+										<RowDefinition Height="*"/>
+									</Grid.RowDefinitions>
+									<Grid x:Name="SizeGridSecond" Grid.Row="1" Grid.Column="1"/>
+									<StackPanel x:Name="SizeGridBlur" Grid.Row="1" Grid.Column="1" MinHeight="50">
+										<Grid Height="10"/>
+										<Grid Height="{Binding ElementName=SizeGridSecond, Path=ActualHeight}"/>
+										<Grid Height="{Binding ElementName=SizeGridSecond, Path=ActualWidth}"/>
+									</StackPanel>
+								</Grid>
+							</Grid>
+						</Grid>
+
+						<Border x:Name="MediaBorder" Panel.ZIndex="-49" Grid.ColumnSpan="3" Grid.RowSpan="3">
+							<Border.Style>
+								<Style TargetType="Border">
+									<Setter Property="VerticalAlignment" Value="Top"/>
+									<Setter Property="HorizontalAlignment" Value="Center"/>
+									<Setter Property="Visibility" Value="Visible"/>
+									<Setter Property="Opacity" Value="1"/>
+									<Setter Property="Height" Value="650"/>
+									<Setter Property="Grid.OpacityMask">
+										<Setter.Value>
+											<ImageBrush ImageSource="{ThemeFile 'Images/FadeBottom.png'}" RenderOptions.BitmapScalingMode="Fant" Stretch="Fill"/>
+										</Setter.Value>
+									</Setter>
+									<Style.Triggers>
+
+									</Style.Triggers>
+								</Style>
+							</Border.Style>
+							<Grid Grid.ColumnSpan="3" Grid.RowSpan="3" VerticalAlignment="Top" HorizontalAlignment="Center"
+					Panel.ZIndex="-48" >
+								<Grid.Style>
+									<Style TargetType="Grid">
+										<Setter Property="Opacity" Value="1"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</Grid.Style>
+								<FadeImage x:Name="MainBackground" Source="{Binding DisplayBackgroundImage, NotifyOnTargetUpdated=True}"
+									RenderOptions.BitmapScalingMode="Fant" RenderTransformOrigin="0.5,0.5" SourceUpdateDelay="50"
+									HorizontalAlignment="Center" VerticalAlignment="Top" ImageDarkeningBrush="Transparent" >
+									<FadeImage.Style>
+										<Style TargetType="FadeImage">
+											<Setter Property="Stretch" Value="UniformToFill"/>
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+													<Setter Property="Visibility" Value="Collapsed"/>
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</FadeImage.Style>
+								</FadeImage>
+							</Grid>
+						</Border>
+						<Image Source="{ThemeFileBinding Source.Name, PathFormat='Icons/Source/{0}.png'}"
+										   RenderOptions.BitmapScalingMode="Fant" VerticalAlignment="Top" HorizontalAlignment="Left"
+										   MaxHeight="60" Opacity="1" Margin="70,45,0,0" Grid.ColumnSpan="2" >
+							<Image.Style>
+								<Style TargetType="Image">
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding Source={StaticResource SourceLogoDetails}}" Value="False">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Image.Style>
+						</Image>
+						<Grid x:Name="GameDetailsStack" Grid.Row="1" Grid.ColumnSpan="3"  HorizontalAlignment="Left" VerticalAlignment="Center" >
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="*" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.Style>
+								<Style TargetType="Grid">
+									<Setter Property="Opacity" Value="0"/>
+									<Setter Property="Margin" Value="80,20,0,0"/>
+									<Setter Property="Grid.Row" Value="0"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ElementName=Id, Path=Opacity}" Value="1">
+											<DataTrigger.EnterActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:1" From="80,100,0,0">
+															<ThicknessAnimation.EasingFunction>
+																<CubicEase EasingMode="EaseOut"/>
+															</ThicknessAnimation.EasingFunction>
+														</ThicknessAnimation>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0" Duration="0:0:0.7" From="0" To="1"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</DataTrigger.EnterActions>
+											<DataTrigger.ExitActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0" To="80,0,0,0">
+															<ThicknessAnimation.EasingFunction>
+																<CubicEase EasingMode="EaseOut"/>
+															</ThicknessAnimation.EasingFunction>
+														</ThicknessAnimation>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="1" To="0"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</DataTrigger.ExitActions>
+										</DataTrigger>
+										<DataTrigger Binding="{Binding ElementName=LogoTrigger, Path=Opacity}" Value="1">
+											<Setter Property="Visibility" Value="Visible" />
+										</DataTrigger>
+										<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+							<StackPanel Orientation="Vertical">
+								<ContentControl x:Name="ExtraMetadataLoader_LogoLoaderControl" >
+									<ContentControl.Style>
+										<Style TargetType="ContentControl">
+											<Setter Property="MaxWidth" Value="600"/>
+											<Setter Property="MaxHeight" Value="250"/>
+											<Setter Property="Opacity" Value="0"/>
+											<Setter Property="HorizontalAlignment" Value="Left"/>
+											<Setter Property="VerticalAlignment" Value="Center"/>
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding ElementName=Id, Path=Opacity}" Value="1">
+													<DataTrigger.EnterActions>
+														<BeginStoryboard>
+															<Storyboard>
+																<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0" Duration="0:0:0.7" From="0" To="1"/>
+															</Storyboard>
+														</BeginStoryboard>
+													</DataTrigger.EnterActions>
+													<DataTrigger.ExitActions>
+														<BeginStoryboard>
+															<Storyboard>
+																<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="1" To="0"/>
+															</Storyboard>
+														</BeginStoryboard>
+													</DataTrigger.ExitActions>
+												</DataTrigger>
+												<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="false">
+													<Setter Property="Visibility" Value="Collapsed"/>
+												</DataTrigger>
+												<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+													<Setter Property="Visibility" Value="Collapsed"/>
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</ContentControl.Style>
+								</ContentControl>
+								<Image Source="{Binding IconObject}">
+									<Image.Style>
+										<Style TargetType="Image">
+											<Setter Property="Visibility" Value="Collapsed" />
+											<Setter Property="Opacity" Value="0" />
+											<Setter Property="Margin" Value="0,0,0,50" />
+											<Setter Property="MaxWidth" Value="180"/>
+											<Setter Property="MaxHeight" Value="180"/>
+											<Setter Property="HorizontalAlignment" Value="Left"/>
+											<Setter Property="VerticalAlignment" Value="Bottom"/>
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding ElementName=Id, Path=Opacity}" Value="1">
+													<DataTrigger.EnterActions>
+														<BeginStoryboard>
+															<Storyboard>
+																<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0" Duration="0:0:0.7" From="0" To="1"/>
+															</Storyboard>
+														</BeginStoryboard>
+													</DataTrigger.EnterActions>
+													<DataTrigger.ExitActions>
+														<BeginStoryboard>
+															<Storyboard>
+																<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="1" To="0"/>
+															</Storyboard>
+														</BeginStoryboard>
+													</DataTrigger.ExitActions>
+												</DataTrigger>
+												<DataTrigger Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsLogoAvailable}" Value="False">
+													<Setter Property="Visibility" Value="Visible" />
+												</DataTrigger>
+												<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Source}" Value="{x:Null}">
+													<Setter Property="Visibility" Value="Collapsed" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</Image.Style>
+								</Image>
+								<StackPanel Orientation="Vertical" >
+									<StackPanel.Style>
+										<Style TargetType="StackPanel" >
+											<Setter Property="Opacity" Value="0"/>
+											<Setter Property="Margin" Value="0,50,0,0"/>
+											<Setter Property="MaxWidth" Value="800"/>
+											<Setter Property="HorizontalAlignment" Value="Left"/>
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding ElementName=Id, Path=Opacity}" Value="1">
+													<DataTrigger.EnterActions>
+														<BeginStoryboard>
+															<Storyboard>
+																<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.5" Duration="0:0:1" From="0" To="1"/>
+															</Storyboard>
+														</BeginStoryboard>
+													</DataTrigger.EnterActions>
+													<DataTrigger.ExitActions>
+														<BeginStoryboard>
+															<Storyboard>
+																<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="1" To="0"/>
+															</Storyboard>
+														</BeginStoryboard>
+													</DataTrigger.ExitActions>
+												</DataTrigger>
+												<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+													<Setter Property="Visibility" Value="Collapsed"/>
+												</DataTrigger>
+												<DataTrigger Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsLogoAvailable}" Value="False">
+													<Setter Property="Margin" Value="0,0,0,0" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</StackPanel.Style>
+									<StackPanel>
+
+									</StackPanel>
+									<StackPanel Orientation="Vertical" >
+										<StackPanel.Style>
+											<Style TargetType="StackPanel">
+												<Setter Property="Margin" Value="0,0,0,0"/>
+												<Style.Triggers>
+													<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+														<Setter Property="Visibility" Value="Collapsed"/>
+													</DataTrigger>
+												</Style.Triggers>
+											</Style>
+										</StackPanel.Style>
+										<StackPanel x:Name="AdditionalGameDetailsPanel" Orientation="Horizontal" >
+											<StackPanel.Style>
+												<Style TargetType="StackPanel">
+													<Setter Property="Margin" Value="0,10,0,0"/>
+													<Setter Property="HorizontalAlignment" Value="Left"/>
+													<Setter Property="Visibility" Value="Visible"/>
+													<Style.Triggers>
+
+													</Style.Triggers>
+												</Style>
+											</StackPanel.Style>
+											<StackPanel Orientation="Horizontal" >
+												<!--GameTitles Infobar-->
+												<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" SnapsToDevicePixels="True">
+													<TextBlock Style="{StaticResource TextBlockBoldBaseStyle}"
+													   Text="{Binding Publishers[0], Converter={StaticResource ListToStringConverter}}"
+													   Foreground="#BFEAD3CF" VerticalAlignment="Top"
+													   FontSize="28" Margin="0,10,0,0.5" >
+													</TextBlock>
+
+													<Rectangle Width="1" Height="28" Fill="#BFEAD3CF" Margin="10,0,10,0" VerticalAlignment="Bottom"/>
+													<TextBlock Style="{StaticResource TextBlockBoldBaseStyle}"
+														Text="{Binding ReleaseYear, Converter={StaticResource ListToStringConverter}}"
+													   Foreground="GhostWhite" VerticalAlignment="Center"
+													   FontSize="24" Margin="0.2,10,5,0" >
+													</TextBlock>
+												</StackPanel>
+											</StackPanel>
+
+										</StackPanel>
+										<StackPanel Orientation="Vertical" Margin="0,10,0,0" >
+											<StackPanel Orientation="Horizontal" Margin="0,0,0,0" >
+												<TextBlock Text="{DynamicResource LOCTimePlayed}" Margin="0,2,0,0" FontSize="28" Foreground="#BFEAD3CF" Style="{StaticResource TextBlockBoldBaseStyle}" />
+												<Rectangle Width="1" Height="28" Fill="#BFEAD3CF" Margin="10,0,10,0" VerticalAlignment="Stretch"/>
+												<TextBlock Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}" Margin="0,5,0,0" FontSize="24" Foreground="GhostWhite" Style="{StaticResource TextBlockBoldBaseStyle}" />
+											</StackPanel>
+											<StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+												<TextBlock Text="{DynamicResource LOCGameLastActivityTitle}" Margin="0,2,0,0" FontSize="28" Foreground="#BFEAD3CF" Style="{StaticResource TextBlockBoldBaseStyle}" />
+												<Rectangle Width="1" Height="28" Fill="#BFEAD3CF" Margin="10,0,10,0" VerticalAlignment="Stretch"/>
+												<TextBlock Text="{Binding LastActivity, Converter={StaticResource DateTimeToLastPlayedConverter}}" Margin="0,5,0,0" FontSize="24" Foreground="GhostWhite" Style="{StaticResource TextBlockBoldBaseStyle}" />
+											</StackPanel>
+											<StackPanel Orientation="Horizontal" Margin="0,10,0,0" Tag="{PluginSettings Plugin=SuccessStory, Path=HasData}">
+												<StackPanel.Style>
+													<Style TargetType="StackPanel">
+														<Setter Property="Visibility" Value="Collapsed" />
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+																<Setter Property="Visibility" Value="Visible" />
+															</DataTrigger>
+															<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</StackPanel.Style>
+												<TextBlock Text="{DynamicResource LOCSuccessStoryAchievements}" Margin="0,2,0,0" FontSize="28" Foreground="#BFEAD3CF" Style="{StaticResource TextBlockBoldBaseStyle}" />
+												<Rectangle Width="1" Height="28" Fill="#BFEAD3CF" Margin="10,0,10,0" VerticalAlignment="Stretch"/>
+												<TextBlock Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked, FallbackValue='-'}"  Style="{StaticResource TextBlockBoldBaseStyle}" Foreground="GhostWhite"  FontSize="24" Margin="0,5,0,0" />
+												<TextBlock Text="/" Style="{StaticResource TextBlockAltLightBaseStyle}" FontSize="24" Foreground="#BFEAD3CF" Margin="0,5,0,0" />
+												<TextBlock Text="{PluginSettings Plugin=SuccessStory, Path=Total, FallbackValue='-'}"  Style="{StaticResource TextBlockBoldBaseStyle}" FontSize="24" Foreground="GhostWhite" Margin="0,5,0,0" />
+												<TextBlock Text="(" Style="{StaticResource TextBlockAltLightBaseStyle}" FontSize="24" Foreground="#BFEAD3CF" Margin="10,5,0,0" />
+												<TextBlock Text="{PluginSettings Plugin=SuccessStory, Path=Percent, FallbackValue='-', StringFormat='{}{0}%'}" Style="{StaticResource TextBlockBoldBaseStyle}" FontSize="22" Foreground="GhostWhite" Margin="0,6,0,0" />
+												<TextBlock Text=")" Style="{StaticResource TextBlockAltLightBaseStyle}" FontSize="24" Foreground="#BFEAD3CF" Margin="0,5,0,0" />
+											</StackPanel>
+											<!--Game Button-->
+											<Grid x:Name="GameButtons" IsEnabled="True" >
+												<Grid.Style>
+													<Style TargetType="Grid">
+														<Setter Property="Opacity" Value="1"/>
+														<Setter Property="HorizontalAlignment" Value="Left"/>
+														<Setter Property="Margin" Value="0,40,0,0"/>
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+																<Setter Property="Visibility" Value="Collapsed" />
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</Grid.Style>
+												<StackPanel Orientation="Horizontal" >
+													<ButtonEx x:Name="PART_ButtonContext" Style="{DynamicResource ButtonContext}"
+														Margin="0,0,20,0" Height="50" MinWidth="240" HorizontalContentAlignment="Center">
+													</ButtonEx>
+													<ToggleButtonEx x:Name="SuccessButton" Style="{DynamicResource TrophéeToggleButton}"
+														Margin="0,0,20,0" Height="50" MinWidth="100" HorizontalContentAlignment="Center">
+													</ToggleButtonEx>
+
+													<ButtonEx x:Name="PART_ButtonOptions" Height="50" Width="50"
+											Style="{DynamicResource GameDetailsGameOptionsButton}" Margin="0,0,0,0" />
+												</StackPanel>
+											</Grid>
+
+											<StackPanel>
+												<StackPanel.Style>
+													<Style TargetType="StackPanel">
+														<Setter Property="Visibility" Value="Collapsed"/>
+														<Style.Triggers>
+															<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+																<Setter Property="Visibility" Value="Visible"/>
+															</DataTrigger>
+														</Style.Triggers>
+													</Style>
+												</StackPanel.Style>
+												<ToggleButtonEx x:Name="SuccessChangeToggle" Style="{DynamicResource TrophéeChangeButton}"
+													Margin="470,-50,0,0" Height="50" MaxWidth="180"  HorizontalContentAlignment="Center"
+													VerticalAlignment="Bottom" HorizontalAlignment="Left">
+
+												</ToggleButtonEx>
+											</StackPanel>
+											
+										</StackPanel>
+									</StackPanel>
+								</StackPanel>
+							</StackPanel>
+
+							<Grid x:Name="ScrollGrid" HorizontalAlignment="Left" VerticalAlignment="Center"
+					 FocusVisualStyle="{x:Null}"  >
+								<Grid.Style>
+									<Style TargetType="Grid" >
+										<Setter Property="Opacity" Value="0"/>
+										<Setter Property="Margin" Value="0,50,0,0"/>
+										<Setter Property="Width" Value="920"/>
+										<Setter Property="Grid.Row" Value="1"/>
+										<Setter Property="Grid.RowSpan" Value="2"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding ElementName=Id, Path=Opacity}" Value="1">
+												<DataTrigger.EnterActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.5" Duration="0:0:1" From="0" To="1"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</DataTrigger.EnterActions>
+												<DataTrigger.ExitActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="1" To="0"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</DataTrigger.ExitActions>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsKeyboardFocusWithin}" Value="False">
+												<Setter Property="Grid.OpacityMask" Value="{DynamicResource ScrollFadeBrush}" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=HltbIcon, Path=Visibility}" Value="Visible">
+												<Setter Property="Grid.RowSpan" Value="1"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</Grid.Style>
+								<ScrollViewerEx x:Name="PART_ScrollHtmlDescription" FocusVisualStyle="{x:Null}"
+						ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+									<HtmlTextView x:Name="PART_HtmlDescription"
+										HtmlFontSize="{DynamicResource FontSize}" HtmlFontFamily="Kozuka Gothic Pro L"
+											HtmlForeground="#BFEAD3CF"
+											LinkForeground="{DynamicResource GlyphColor}"
+											FocusVisualStyle="{x:Null}" />
+								</ScrollViewerEx>
+								<Grid.Effect>
+									<DropShadowEffect ShadowDepth="2"/>
+								</Grid.Effect>
+							</Grid>
+
+						</Grid>
+						<!--Game Trailer-->
+
+						<StackPanel>
+							<StackPanel.Style>
+								<Style TargetType="StackPanel">
+									<Setter Property="Opacity" Value="0"/>
+									<Setter Property="VerticalAlignment" Value="Top"/>
+									<Setter Property="HorizontalAlignment" Value="Right"/>
+									<Setter Property="Margin" Value="0,30,10,0"/>
+									<Setter Property="Grid.Row" Value="0"/>
+									<Setter Property="Grid.RowSpan" Value="3"/>
+									<Setter Property="Grid.ColumnSpan" Value="3"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ElementName=Id, Path=Opacity}" Value="1">
+											<DataTrigger.EnterActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.5" Duration="0:0:1" From="0" To="1"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</DataTrigger.EnterActions>
+											<DataTrigger.ExitActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="1" To="0"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</DataTrigger.ExitActions>
+										</DataTrigger>
+										<DataTrigger Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}" Value="True">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+										<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</StackPanel.Style>
+
+						</StackPanel>
+						<!--HowLongToBeat-->
+
+						<StackPanel x:Name="HltbStack" Orientation="Horizontal" >
+							<StackPanel.Style>
+								<Style TargetType="StackPanel">
+									<Setter Property="Opacity" Value="0"/>
+									<Setter Property="Visibility" Value="Visible"/>
+									<Setter Property="VerticalAlignment" Value="Bottom"/>
+									<Setter Property="HorizontalAlignment" Value="Left"/>
+									<Setter Property="Grid.Row" Value="3"/>
+									<Setter Property="Height" Value="60"/>
+									<Setter Property="Margin" Value="50,0,0,30"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ElementName=Id, Path=Opacity}" Value="1">
+											<DataTrigger.EnterActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.5" Duration="0:0:1" From="0" To="1"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</DataTrigger.EnterActions>
+											<DataTrigger.ExitActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="1" To="0"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</DataTrigger.ExitActions>
+										</DataTrigger>
+										<DataTrigger Binding="{PluginSettings Plugin=HowLongToBeat, Path=HasData}" Value="{x:Null}">
+											<Setter Property="Visibility" Value="Collapsed" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</StackPanel.Style>
+							<Image x:Name="HltbIcon" RenderOptions.BitmapScalingMode="Fant"
+								Source="{ThemeFile 'Images/Hltb1.png'}" Stretch="Uniform" >
+								<Image.Style>
+									<Style TargetType="Image">
+										<Setter Property="Visibility" Value="Visible"/>
+										<Style.Triggers>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}" Value="--"/>
+													<Condition Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}" Value="--"/>
+													<Condition Binding="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}" Value="--"/>
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Visibility" Value="Collapsed" />
+											</MultiDataTrigger>
+										</Style.Triggers>
+									</Style>
+								</Image.Style>
+								<Image.Effect>
+									<DropShadowEffect ShadowDepth="1" Color="Black"
+									RenderingBias="Quality" BlurRadius="0" Opacity="0.8"/>
+								</Image.Effect>
+							</Image>
+							<StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+								<StackPanel.Style>
+									<Style TargetType="StackPanel">
+										<Setter Property="Margin" Value="20,10,10,5"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}" Value="--">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</StackPanel.Style>
+								<TextBlock Text="{DynamicResource LOCHowLongToBeatMainStory}" FontSize="28" Foreground="#BFEAD3CF"
+									TextAlignment="Center" Style="{StaticResource TextBlockAltBaseStyle}" Margin="0,2,0,0" />
+								<Rectangle Width="1" Height="28" Fill="#BFEAD3CF" Margin="10,0,10,0" VerticalAlignment="Stretch"/>
+								<TextBlock Text="{PluginSettings Plugin=HowLongToBeat, Path=MainStoryFormat}" Foreground="GhostWhite" Style="{StaticResource TextBlockAltBaseStyle}"
+									TextAlignment="Center" FontSize="24" Margin="0,5,0,0" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+								<StackPanel.Style>
+									<Style TargetType="StackPanel">
+										<Setter Property="Margin" Value="20,10,10,5"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}" Value="--">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</StackPanel.Style>
+								<TextBlock Text="{DynamicResource LOCHowLongToBeatMainExtra}" FontSize="28" Foreground="#BFEAD3CF"
+									TextAlignment="Center" Style="{StaticResource TextBlockAltBaseStyle}" Margin="0,2,0,0" />
+								<Rectangle Width="1" Height="28" Fill="#BFEAD3CF" Margin="10,0,10,0" VerticalAlignment="Stretch"/>
+								<TextBlock Text="{PluginSettings Plugin=HowLongToBeat, Path=MainExtraFormat}" Foreground="GhostWhite" Style="{StaticResource TextBlockAltBaseStyle}"
+									TextAlignment="Center" FontSize="24" Margin="0,5,0,0" />
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+								<StackPanel.Style>
+									<Style TargetType="StackPanel">
+										<Setter Property="Margin" Value="20,10,10,5"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}" Value="--">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</StackPanel.Style>
+								<TextBlock Text="{DynamicResource LOCHowLongToBeatCompletionist}" FontSize="28" Foreground="#BFEAD3CF"
+									TextAlignment="Center" Style="{StaticResource TextBlockAltBaseStyle}" Margin="0,2,0,0" />
+								<Rectangle Width="1" Height="28" Fill="#BFEAD3CF" Margin="10,0,10,0" VerticalAlignment="Stretch"/>
+								<TextBlock Text="{PluginSettings Plugin=HowLongToBeat, Path=CompletionistFormat}" Foreground="GhostWhite" Style="{StaticResource TextBlockAltBaseStyle}"
+									TextAlignment="Center" FontSize="24" Margin="0,5,0,0" />
+							</StackPanel>
+						</StackPanel>
+
+						<Grid x:Name="Genres" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" >
+							<Grid.Style>
+								<Style TargetType="Grid">
+									<Setter Property="Opacity" Value="0"/>
+									<Setter Property="HorizontalAlignment" Value="Right"/>
+									<Setter Property="Visibility" Value="Collapsed"/>
+									<Style.Triggers>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding ElementName=Id, Path=Opacity}" Value="1"/>
+											</MultiDataTrigger.Conditions>
+											<MultiDataTrigger.EnterActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.6" Duration="0:0:1" To="1"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.EnterActions>
+											<MultiDataTrigger.ExitActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.ExitActions>
+											<Setter Property="Visibility" Value="Visible"/>
+										</MultiDataTrigger>
+										<DataTrigger Binding="{Binding ElementName=ChangeViewButton, Path=IsChecked}" Value="False">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+										<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+							<TextBlock>
+								<TextBlock.Style>
+									<Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockAltBaseStyle}" >
+										<Setter Property="Foreground" Value="#BFEAD3CF" />
+										<Setter Property="FontSize" Value="30" />
+										<Setter Property="Margin" Value="80,5,60,0" />
+										<Setter Property="TextTrimming" Value="WordEllipsis"/>
+										<Setter Property="Text" Value="{Binding Genres, Converter={StaticResource ListToStringConverter}, ConverterParameter='  |  '}" />
+										<Style.Triggers>
+
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+						</Grid>
+
+						<Grid Grid.Row="0" Height="10" Width="10" Focusable="False" >
+							<TextBlock x:Name="LogoTrigger" Text="{Binding Game.Id, NotifyOnTargetUpdated=True}" Foreground="Transparent">
+								<TextBlock.Triggers>
+									<EventTrigger RoutedEvent="Binding.TargetUpdated">
+										<BeginStoryboard>
+											<Storyboard>
+												<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0" />
+												<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="0" To="1" BeginTime="0:0:0.3" />
+											</Storyboard>
+										</BeginStoryboard>
+									</EventTrigger>
+								</TextBlock.Triggers>
+								<TextBlock.Style>
+									<Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+										<Setter Property="Visibility" Value="Collapsed" />
+										<Style.Triggers>
+
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+							<TextBlock x:Name="Id" Text="{Binding Game.Id, NotifyOnTargetUpdated=True}" Foreground="Transparent">
+								<TextBlock.Triggers>
+									<EventTrigger RoutedEvent="Binding.TargetUpdated">
+										<BeginStoryboard>
+											<Storyboard>
+												<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0" />
+												<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" From="0" To="1" BeginTime="0:0:0" />
+											</Storyboard>
+										</BeginStoryboard>
+									</EventTrigger>
+								</TextBlock.Triggers>
+								<TextBlock.Style>
+									<Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+										<Setter Property="Visibility" Value="Collapsed" />
+										<Style.Triggers>
+
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+							<TextBlock x:Name="TrailerTrigger" Text="{Binding Game.Id, NotifyOnTargetUpdated=True}" Foreground="Transparent">
+								<TextBlock.Style>
+									<Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+										<Setter Property="Visibility" Value="Collapsed" />
+										<Setter Property="Opacity" Value="0" />
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding ElementName=Id, Path=Opacity}" Value="1"/>
+													<Condition Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Visible"/>
+													<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}" Value="True"/>
+												</MultiDataTrigger.Conditions>
+												<MultiDataTrigger.EnterActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:1.1" Duration="0:0:0" To="1"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</MultiDataTrigger.EnterActions>
+												<MultiDataTrigger.ExitActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</MultiDataTrigger.ExitActions>
+												<Setter Property="Visibility" Value="Visible"/>
+											</MultiDataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+						</Grid>
+
+						<Grid x:Name="TrailerContainer" Background="Transparent" FocusVisualStyle="{x:Null}" Panel.ZIndex="-47" >
+							<Grid.Style>
+								<Style TargetType="Grid">
+									<Setter Property="Margin" Value="0,0,50,-10"/>
+									<Setter Property="Grid.Row" Value="1"/>
+									<Setter Property="Grid.Column" Value="0"/>
+									<Setter Property="Grid.ColumnSpan" Value="3"/>
+									<Setter Property="HorizontalAlignment" Value="Right"/>
+									<Setter Property="VerticalAlignment" Value="Bottom"/>
+									<Setter Property="Opacity" Value="0"/>
+									<Setter Property="Visibility" Value="Collapsed"/>
+									<Setter Property="MaxWidth" Value="800"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding ElementName=Id, Path=Opacity}" Value="1"/>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}" Value="True"/>
+												<Condition Binding="{Binding Source={StaticResource TrailerDetails}}" Value="True"/>
+											</MultiDataTrigger.Conditions>
+											<MultiDataTrigger.EnterActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.5" Duration="0:0:1" To="1" />
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.EnterActions>
+											<MultiDataTrigger.ExitActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0" />
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.ExitActions>
+											<Setter Property="Visibility" Value="Visible"/>
+										</MultiDataTrigger>
+										<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+							<Border x:Name="TrailerMask" Background="Black" BorderThickness="0">
+								<Border.Style>
+									<Style TargetType="Border">
+										<Setter Property="Visibility" Value="Visible"/>
+										<Setter Property="Opacity" Value="0"/>
+										<Setter Property="CornerRadius" Value="15"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=Id, Path=Opacity}" Value="1">
+												<DataTrigger.EnterActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:1.6" Duration="0:0:1" To="1"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</DataTrigger.EnterActions>
+												<DataTrigger.ExitActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</DataTrigger.ExitActions>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}" Value="True">
+												<Setter Property="CornerRadius" Value="0"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</Border.Style>
+							</Border>
+							<ContentControl x:Name="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound" >
+								<ContentControl.Style>
+									<Style TargetType="ContentControl">
+										<Setter Property="Opacity" Value="0" />
+										<Setter Property="Visibility" Value="Collapsed" />
+										<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+										<Setter Property="VerticalContentAlignment" Value="Stretch" />
+										<Setter Property="HorizontalAlignment" Value="Center" />
+										<Setter Property="VerticalAlignment" Value="Center" />
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=Id, Path=Opacity}" Value="1">
+												<DataTrigger.EnterActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:1.5" Duration="0:0:1" To="1"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</DataTrigger.EnterActions>
+												<DataTrigger.ExitActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</DataTrigger.ExitActions>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=TrailerTrigger, Path=Opacity}" Value="1">
+												<Setter Property="Visibility" Value="Visible"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}" Value="False"/>
+												</MultiDataTrigger.Conditions>
+												<Setter Property="Effect" >
+													<Setter.Value>
+														<DropShadowEffect ShadowDepth="2" Color="#000000"
+														RenderingBias="Performance" BlurRadius="20" Opacity="0.8"/>
+													</Setter.Value>
+												</Setter>
+											</MultiDataTrigger>
+											<DataTrigger Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}" Value="False">
+												<Setter Property="ContentControl.OpacityMask">
+													<Setter.Value>
+														<VisualBrush Visual="{Binding ElementName=TrailerMask}" />
+													</Setter.Value>
+												</Setter>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</ContentControl.Style>
+							</ContentControl>
+							<StackPanel x:Name="MediaButtons" FocusVisualStyle="{x:Null}"
+					VerticalAlignment="Top" HorizontalAlignment="Right"
+								Orientation="Vertical" Margin="0,0,0,0">
+								<StackPanel.Style>
+									<Style TargetType="StackPanel">
+										<Setter Property="Visibility" Value="Collapsed"/>
+										<Setter Property="Opacity" Value="0"/>
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+												<Setter Property="Visibility" Value="Collapsed"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=TrailerContainer, Path=Opacity}" Value="1">
+												<DataTrigger.EnterActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0" Duration="0:0:0.5" To="1"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</DataTrigger.EnterActions>
+												<DataTrigger.ExitActions>
+													<BeginStoryboard>
+														<Storyboard>
+															<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0"/>
+														</Storyboard>
+													</BeginStoryboard>
+												</DataTrigger.ExitActions>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding ElementName=TrailerContainer, Path=Opacity}" Value="1">
+												<Setter Property="Visibility" Value="Visible"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</StackPanel.Style>
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<ToggleButtonEx x:Name="TrailerZoom" Width="50" Margin="15,15,15,0" Style="{DynamicResource TrailerZoomToggle}" Grid.Row="0" />
+									<ToggleButtonEx x:Name="TrailerPlay" Width="50" Margin="15,15,15,0"
+										Style="{DynamicResource TrailerPlayToggle}"
+										Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPlayCommand}" Grid.Row="1" />
+									<ToggleButtonEx x:Name="TrailerMute" Width="50" Margin="15,15,15,15"
+													Style="{DynamicResource TrailerMuteToggle}" Visibility="Visible"
+														Command="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoMuteCommand}" Grid.Row="2" />
+								</Grid>
+							</StackPanel>
+						</Grid>
+
+
+						<Grid x:Name="Trophée" Grid.Row="1" >
+							<Grid.Style>
+								<Style TargetType="Grid">
+									<Setter Property="Visibility" Value="Collapsed"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+											<Setter Property="Visibility" Value="Visible"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+
+							<StackPanel>
+
+								<Border Background="Transparent" CornerRadius="4" Name="mask"/>
+								<Grid Name="NoPlugin" Tag="{PluginSettings Plugin=SuccessStory, Path=HasData}">
+									<TextBlock Text="SuccessStory Plugin"  HorizontalAlignment="Center" VerticalAlignment="Center"
+											   Style="{DynamicResource TextBlockBaseStyle}" Margin="700,50,45,40"
+											   FontWeight="SemiBold" FontSize="45"/>
+									<TextBlock Text="not Installed or Missing Data"  HorizontalAlignment="Center" VerticalAlignment="Center"
+											   Style="{DynamicResource TextBlockBaseStyle}" Margin="700,150,45,40"
+											   FontWeight="SemiBold" FontSize="45"/>
+									<Grid.Style>
+										<Style TargetType="Grid">
+											<Setter Property="Visibility" Value="Visible" />
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+													<Setter Property="Visibility" Value="Hidden" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</Grid.Style>
+								</Grid>
+							</StackPanel>
+
+							<StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
+								<TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="White"
+										   Text="{PluginSettings Plugin=SuccessStory, Path=Unlocked, StringFormat=Unlocked : {0}}" HorizontalAlignment="Center" VerticalAlignment="Top"
+										   FontWeight="SemiBold" FontSize="28" Margin="0,15,100,0">
+									<TextBlock.Style>
+										<Style TargetType="TextBlock">
+											<Style.Triggers>
+												<DataTrigger Binding="{Binding ElementName=SuccessChangeToggle, Path=IsChecked}" Value="True">
+													<Setter Property="Visibility" Value="Collapsed"/>
+												</DataTrigger>
+												<DataTrigger Binding="{Binding ElementName=NoPlugin, Path=Visibility}" Value="Visible">
+													<Setter Property="Visibility" Value="Collapsed" />
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</StackPanel>
+
+							<StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
+								<TextBlock Style="{DynamicResource TextBlockBaseStyle}" Foreground="White"
+										   Text="{PluginSettings Plugin=SuccessStory, Path=Locked, StringFormat=Locked : {0}}" HorizontalAlignment="Center" VerticalAlignment="Top"
+										   FontWeight="SemiBold" FontSize="28" Margin="0,15,100,0">
+									<TextBlock.Style>
+										<Style TargetType="TextBlock">
+											<Style.Triggers>
+
+												<DataTrigger Binding="{Binding ElementName=NoPlugin, Path=Visibility}" Value="Visible">
+													<Setter Property="Visibility" Value="Collapsed" />
+												</DataTrigger>
+												<DataTrigger Binding="{Binding ElementName=SuccessChangeToggle, Path=IsChecked}" Value="False">
+													<Setter Property="Visibility" Value="Collapsed"/>
+												</DataTrigger>
+											</Style.Triggers>
+										</Style>
+									</TextBlock.Style>
+								</TextBlock>
+							</StackPanel>
+
+							<Grid x:Name="AchievementList" VerticalAlignment="Top" HorizontalAlignment="Right">
+								<ListView x:Name="AchievementListAll" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True" Margin="60"
+																		  VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"  BorderBrush="Transparent" BorderThickness="0" Background="Transparent"
+																		  FocusVisualStyle="{x:Null}" Focusable="False" KeyboardNavigation.DirectionalNavigation="Local" ItemsSource="{PluginSettings Plugin=SuccessStory, Path=ListAchievements}" >
+
+
+									<ListView.ItemContainerStyle>
+										<Style TargetType="ListViewItem">
+											<Setter Property="Visibility" Value="Collapsed"/>
+											<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+											<Setter Property="Focusable" Value="True"/>
+											<Setter Property="Template">
+												<Setter.Value>
+													<ControlTemplate TargetType="ListViewItem">
+														<Border BorderBrush="Transparent" CornerRadius="5">
+															<Grid  Width="1000" Height="110" Margin="5,10,10,10" >
+																<Border Name="mask" CornerRadius="5" Background="Black"/>
+																<Grid>
+																	<Grid.OpacityMask>
+																		<VisualBrush Visual="{Binding ElementName=mask}"/>
+																	</Grid.OpacityMask>
+																	<Image x:Name="Commun" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Stretch="UniformToFill"
+																		   Source="{ThemeFile 'Images/TrophyFond.png'}" Height="110" RenderOptions.BitmapScalingMode="Fant" />
+																	<Image x:Name="Bronze" Visibility="Collapsed" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Stretch="UniformToFill"
+																		   Source="{ThemeFile 'Images/TrophyFondBronze.png'}" Height="110" RenderOptions.BitmapScalingMode="Fant" />
+																	<Image x:Name="Silver" Visibility="Collapsed"  Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+																		   Source="{ThemeFile 'Images/TrophyFondSilver.png'}" Height="110" RenderOptions.BitmapScalingMode="Fant" Stretch="UniformToFill" />
+																	<Image x:Name="Gold" Visibility="Collapsed" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Stretch="UniformToFill"
+																		   Source="{ThemeFile 'Images/TrophyFondGold.png'}" Height="110" RenderOptions.BitmapScalingMode="Fant" />
+																	<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+																		<StackPanel Margin="10,0,0,0" Orientation="Horizontal" >
+																			<Image Margin="0,0,0,0" Source="{Binding Icon}" Height="100" Width="100" VerticalAlignment="Center"/>
+
+																		</StackPanel>
+																		<StackPanel Margin="670,0,0,0" Orientation="Vertical" VerticalAlignment="Center" Height="120">
+																			<StackPanel Margin="175,15,0,0" x:Name="RarityCommunImage" Orientation="Horizontal">
+																				<Image Margin="0,0,0,13" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+																		   Source="{ThemeFile 'Images/BronzeCommon.png'}" Height="40" RenderOptions.BitmapScalingMode="Fant" />
+																			</StackPanel>
+																			<StackPanel Margin="175,15,0,0" x:Name="RarityBronzeImage" Visibility="Collapsed" Orientation="Horizontal">
+																				<Image Margin="0,0,0,13" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+																		   Source="{ThemeFile 'Images/BronzeTrophy.png'}" Height="40" RenderOptions.BitmapScalingMode="Fant" />
+																			</StackPanel>
+																			<StackPanel Margin="175,15,0,0" x:Name="RaritySilverImage" Visibility="Collapsed" Orientation="Horizontal">
+																				<Image Margin="0,0,0,13" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+																		   Source="{ThemeFile 'Images/SilverTrophy.png'}" Height="40" RenderOptions.BitmapScalingMode="Fant" />
+																			</StackPanel>
+																			<StackPanel Margin="175,15,0,0" x:Name="RarityGoldImage" Visibility="Collapsed" Orientation="Horizontal">
+																				<Image Margin="0,0,0,13" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+																		   Source="{ThemeFile 'Images/GoldTrophy.png'}" Height="40" RenderOptions.BitmapScalingMode="Fant" />
+																			</StackPanel>
+																			<TextBlock x:Name="PercentLogic" Margin="0,0,0,0" Text="{Binding Percent, StringFormat={}{0:F0}}" Visibility="Collapsed"/>
+
+
+																		</StackPanel>
+																	</StackPanel>
+
+
+
+																	<Grid VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="1000" Height="120">
+																		<StackPanel Orientation="Vertical">
+																			<TextBlock Margin="145,20,0,10" Text="{Binding Name}" VerticalAlignment="Top"  HorizontalAlignment="Left" FontSize="22" Style="{DynamicResource TextBlockBoldBaseStyle}" />
+																			<TextBlock Margin="145,0,10,0" Height="100" MaxWidth="900" Text="{Binding Description}" Opacity="0.8" TextWrapping="Wrap" VerticalAlignment="Top"  HorizontalAlignment="Left" FontSize="22" Style="{DynamicResource TextBlockBaseStyle}" />
+																		</StackPanel>
+																	</Grid>
+																</Grid>
+																<Border x:Name="MainBorder" Opacity="1" BorderThickness="3" CornerRadius="5" Margin="-1" BorderBrush="White" Visibility="Hidden" Tag="False">
+																	<Border.CacheMode>
+																		<BitmapCache EnableClearType="False"
+											 RenderAtScale="1"
+											 SnapsToDevicePixels="False"/>
+																	</Border.CacheMode>
+																</Border>
+															</Grid>
+														</Border>
+
+														<ControlTemplate.Triggers>
+															<Trigger Property="IsFocused" Value="True">
+																<Setter Property="Visibility" Value="Visible" TargetName="MainBorder" />
+																<Setter Property="Tag" Value="True" TargetName="MainBorder" />
+															</Trigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="0"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="1"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="2"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="3"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="4"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="5"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="6"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="7"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="8"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="9"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="10"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="11"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="12"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="13"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="14"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="15"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="16"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="17"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="18"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="19"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="20"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="21"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="22"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="23"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="24"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="25"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="26"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="27"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="28"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="29"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="30"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="31"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="32"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="33"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="34"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="35"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="36"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="37"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="38"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="39"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=PercentLogic, Path=Text}" Value="40"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter TargetName="RarityGoldImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RaritySilverImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="RarityBronzeImage" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="RarityCommunImage" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Commun" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Bronze" Property="Visibility" Value="Visible"/>
+																	<Setter TargetName="Silver" Property="Visibility" Value="Collapsed"/>
+																	<Setter TargetName="Gold" Property="Visibility" Value="Collapsed"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=SuccessChangeToggle, Path=IsChecked}" Value="True"/>
+																	<Condition Binding="{Binding IsUnlock}" Value="False"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=SuccessChangeToggle, Path=IsChecked}" Value="{x:Null}"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+															<MultiDataTrigger>
+																<MultiDataTrigger.Conditions>
+																	<Condition Binding="{Binding ElementName=SuccessChangeToggle, Path=IsChecked}" Value="False"/>
+																	<Condition Binding="{Binding IsUnlock}" Value="True"/>
+																</MultiDataTrigger.Conditions>
+																<MultiDataTrigger.Setters>
+																	<Setter Property="Visibility" Value="Visible"/>
+																</MultiDataTrigger.Setters>
+															</MultiDataTrigger>
+
+														</ControlTemplate.Triggers>
+													</ControlTemplate>
+												</Setter.Value>
+											</Setter>
+										</Style>
+									</ListView.ItemContainerStyle>
+								</ListView>
+							</Grid>
+						</Grid>
+						
+						
+						<!--Sound-->
+
+						<MediaElement x:Name="EnterGameDetailsChime" Source="{ThemeFile 'audio/EnterGameDetails.wav'}" MediaElementBehaviors.Repeat="False" >
+							<MediaElement.Style>
+								<Style TargetType="MediaElement">
+									<Setter Property="LoadedBehavior" Value="Manual"/>
+									<Setter Property="UnloadedBehavior" Value="Close"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Visible">
+											<Setter Property="LoadedBehavior" Value="Play"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</MediaElement.Style>
+						</MediaElement>
+
+						<MediaElement x:Name="ExitGameDetailsChime" Source="{ThemeFile 'audio/ExitGameDetails.wav'}" MediaElementBehaviors.Repeat="False" >
+							<MediaElement.Style>
+								<Style TargetType="MediaElement">
+									<Setter Property="LoadedBehavior" Value="Manual"/>
+									<Setter Property="UnloadedBehavior" Value="Close"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+											<Setter Property="LoadedBehavior" Value="Play"/>
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</MediaElement.Style>
+						</MediaElement>
+
+						<TextBlock x:Name="MusicTrigger" Text="{Binding Game.Id, NotifyOnTargetUpdated=True}" Foreground="Transparent">
+							<TextBlock.Triggers>
+								<EventTrigger RoutedEvent="Binding.TargetUpdated">
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0" />
+											<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" From="0" To="1" BeginTime="0:0:0.9" />
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger>
+							</TextBlock.Triggers>
+							<TextBlock.Style>
+								<Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+									<Setter Property="Visibility" Value="Collapsed" />
+									<Style.Triggers>
+
+									</Style.Triggers>
+								</Style>
+							</TextBlock.Style>
+						</TextBlock>
+
+						<TextBlock x:Name="MusicPath" Tag="{DynamicResource ExtraMetadataPath}" Visibility="Collapsed">
+							<TextBlock.Style>
+								<Style TargetType="TextBlock">
+									<Setter Property="Text">
+										<Setter.Value>
+											<MultiBinding StringFormat="{}{0}{1}{2}{3}">
+												<Binding RelativeSource="{RelativeSource Self}" Path="Tag" />
+												<Binding Source="\ExtraMetadata\games\"/>
+												<Binding Path="Game.Id"/>
+												<Binding Source="\Music.mp3" />
+											</MultiBinding>
+										</Setter.Value>
+									</Setter>
+								</Style>
+							</TextBlock.Style>
+						</TextBlock>
+						<MediaElement x:Name="MusicSource" MediaElementBehaviors.Repeat="True" Tag="{DynamicResource UseAbsoluteExtraMetadataPath}">
+							<MediaElement.Style>
+								<Style TargetType="MediaElement">
+									<Setter Property="Volume" Value="0"/>
+									<Setter Property="MediaElement.Source" Value="{Binding ElementName=MusicPath, Path=Text}"/>
+									<Style.Triggers>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{SettingsBinding Fullscreen.IsMusicMuted}" Value="False"/>
+												<Condition Binding="{Binding ElementName=MusicTrigger, Path=Opacity}" Value="1"/>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}" Value="True"/>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsVideoPlaying}" Value="False"/>
+											</MultiDataTrigger.Conditions>
+											<MultiDataTrigger.EnterActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Volume" BeginTime="0:0:0.5" Duration="0:0:2" To="1"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.EnterActions>
+											<MultiDataTrigger.ExitActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Volume" Duration="0:0:1.5" To="0" FillBehavior="Stop"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.ExitActions>
+										</MultiDataTrigger>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding ElementName=Id, Path=Opacity}" Value="1"/>
+												<Condition Binding="{SettingsBinding Fullscreen.IsMusicMuted}" Value="False"/>
+												<Condition Binding="{Binding ElementName=MusicTrigger, Path=Opacity}" Value="1"/>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}" Value="False"/>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsVideoPlaying}" Value="False"/>
+											</MultiDataTrigger.Conditions>
+											<MultiDataTrigger.EnterActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Volume" BeginTime="0:0:0.5" Duration="0:0:2" To="1"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.EnterActions>
+											<MultiDataTrigger.ExitActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Volume" Duration="0:0:1.5" To="0" FillBehavior="Stop"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.ExitActions>
+										</MultiDataTrigger>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}" Value="True"/>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=IsVideoPlaying}" Value="True"/>
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Volume" Value="0" />
+										</MultiDataTrigger>
+										<DataTrigger Binding="{Binding ElementName=MusicTrigger, Path=Opacity}" Value="0">
+											<Setter Property="MediaElement.Source" Value="" />
+										</DataTrigger>
+										<DataTrigger Binding="{SettingsBinding Fullscreen.IsMusicMuted}" Value="True">
+											<Setter Property="MediaElement.Source" Value="" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</MediaElement.Style>
+						</MediaElement>
+
+						<Grid x:Name="CoverContainer" Background="Transparent" FocusVisualStyle="{x:Null}" Panel.ZIndex="-47" >
+							<Grid.Style>
+								<Style TargetType="Grid">
+									<Setter Property="Margin" Value="0,0,60,0"/>
+									<Setter Property="Grid.Row" Value="1"/>									
+									<Setter Property="MaxHeight" Value="400"/>
+									<Setter Property="Width" Value="Auto"/>
+									<Setter Property="HorizontalAlignment" Value="Right"/>
+									<Setter Property="VerticalAlignment" Value="Bottom"/>
+									<Setter Property="Opacity" Value="0"/>
+									<Setter Property="Visibility" Value="Collapsed"/>
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding ElementName=Id, Path=Opacity}" Value="1"/>
+												<Condition Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="False"/>
+											</MultiDataTrigger.Conditions>
+											<MultiDataTrigger.EnterActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.3" Duration="0:0:0.5" To="1"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.EnterActions>
+											<MultiDataTrigger.ExitActions>
+												<BeginStoryboard>
+													<Storyboard>
+														<DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="0"/>
+													</Storyboard>
+												</BeginStoryboard>
+											</MultiDataTrigger.ExitActions>
+											<Setter Property="Visibility" Value="Visible"/>
+										</MultiDataTrigger>
+										<DataTrigger Binding="{Binding ElementName=PART_ElemGameDetails, Path=Visibility}" Value="Collapsed">
+											<Setter Property="Visibility" Value="Collapsed"/>
+										</DataTrigger>
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}" Value="True"/>
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Visibility" Value="Collapsed" />
+										</MultiDataTrigger>
+
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True"/>
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Opacity" Value="0" />
+										</MultiDataTrigger>
+
+
+
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding Source={StaticResource TrailerDetails}}" Value="False"/>
+												<Condition Binding="{Binding Source={StaticResource CoverDetails}}" Value="True"/>
+												<Condition Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True"/>
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Visibility" Value="Collapsed" />
+										</MultiDataTrigger>
+
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}" Value="False"/>
+												<Condition Binding="{Binding Source={StaticResource CoverDetails}}" Value="False"/>
+												<Condition Binding="{Binding ElementName=SuccessButton, Path=IsChecked}" Value="True"/>
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Visibility" Value="Collapsed" />
+										</MultiDataTrigger>
+
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{PluginSettings Plugin=ExtraMetadataLoader, Path=NewContextVideoAvailable}" Value="False"/>
+												<Condition Binding="{Binding Source={StaticResource CoverDetails}}" Value="False"/>
+
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Visibility" Value="Collapsed" />
+										</MultiDataTrigger>
+
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding Source={StaticResource TrailerDetails}}" Value="False"/>
+												<Condition Binding="{Binding Source={StaticResource CoverDetails}}" Value="True"/>
+											</MultiDataTrigger.Conditions>
+											<Setter Property="Visibility" Value="Visible" />
+										</MultiDataTrigger>
+
+									</Style.Triggers>
+								</Style>
+							</Grid.Style>
+							<Border x:Name="CoverMask" Background="Black" BorderThickness="0" >
+								<Border.Style>
+									<Style TargetType="Border">
+										<Setter Property="CornerRadius" Value="15"/>
+										<Setter Property="Height" Value="Auto"/>
+										<Setter Property="Width" Value="Auto"/>
+										<Style.Triggers>
+
+										</Style.Triggers>
+									</Style>
+								</Border.Style>
+							</Border>
+							<Image x:Name="CoverImage" RenderOptions.BitmapScalingMode="Fant" RenderTransformOrigin="0.5,0.5"
+					Source="{Binding CoverImageObject}" HorizontalAlignment="Center" MaxWidth="700" >
+								<Image.Style>
+									<Style TargetType="Image">
+										<Setter Property="Image.OpacityMask">
+											<Setter.Value>
+												<VisualBrush Visual="{Binding ElementName=CoverMask}" />
+											</Setter.Value>
+										</Setter>
+										<Style.Triggers>
+
+										</Style.Triggers>
+									</Style>
+								</Image.Style>
+								<Image.Effect>
+									<DropShadowEffect ShadowDepth="2" Color="#000000"
+									RenderingBias="Performance" BlurRadius="20" Opacity="0.8"/>
+								</Image.Effect>
+							</Image>
+						</Grid>
+
+					</Grid>
+
+					<ControlTemplate.Triggers>
+
+						<DataTrigger Binding="{Binding ElementName=TrailerZoom, Path=IsChecked}" Value="True">
+							<Setter Property="Margin" Value="0,0,0,0" TargetName="TrailerContainer"/>
+							<Setter Property="Height" Value="Auto" TargetName="TrailerContainer"/>
+							<Setter Property="MaxWidth" Value="2161" TargetName="TrailerContainer"/>
+							<Setter Property="Width" Value="Auto" TargetName="TrailerContainer"/>
+							<Setter Property="Grid.Row" Value="0" TargetName="TrailerContainer"/>
+							<Setter Property="Grid.RowSpan" Value="3" TargetName="TrailerContainer"/>
+							<Setter Property="Grid.Column" Value="0" TargetName="TrailerContainer"/>
+							<Setter Property="Grid.ColumnSpan" Value="3" TargetName="TrailerContainer"/>
+							<Setter Property="VerticalAlignment" Value="Stretch" TargetName="TrailerContainer"/>
+							<Setter Property="HorizontalAlignment" Value="Stretch" TargetName="TrailerContainer"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="GameDetailsStack"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ScrollGrid"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="Trophée"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="HltbStack"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="Genres"/>
+							<Setter Property="Visibility" Value="Collapsed" TargetName="CoverContainer"/>
+							<Setter Property="VerticalAlignment" Value="Center" TargetName="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound"/>
+							<Setter Property="HorizontalAlignment" Value="Center" TargetName="ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound"/>
+						</DataTrigger>
+
+						<DataTrigger Binding="{Binding ElementName=TrailerTrigger, Path=Opacity}" Value="0">
+							<Setter Property="IsChecked" Value="False" TargetName="TrailerZoom"/>
+						</DataTrigger>
+
+						<DataTrigger Binding="{Binding ElementName=TrailerMute, Path=Visibility}" Value="Collapsed">
+							<Setter Property="Margin" Value="15,15,15,15" TargetName="TrailerPlay"/>
+						</DataTrigger>
+
+						<DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.SettingsModel.Settings.IsVideoPlaying}" Value="{StaticResource True}">
+							<Setter Property="Command" Value="{Binding ElementName=ExtraMetadataLoader_VideoLoaderControl_NoControls_Sound, Path=Content.VideoPauseCommand}" TargetName="TrailerPlay"/>
+						</DataTrigger>
+
+					</ControlTemplate.Triggers>
+
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

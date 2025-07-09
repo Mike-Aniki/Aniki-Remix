@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+<sys:String x:Key="LOCViewStyle">Стиль</sys:String>
+<sys:String x:Key="LOCDefault">По умолчанию</sys:String>
+<sys:String x:Key="LOCSteamBanner">Баннер Steam</sys:String>
+<sys:String x:Key="LOCTrailerOnmainview">Трейлер на главном экране</sys:String>
+<sys:String x:Key="LOCBottomBar">Фильтровая панель</sys:String>
+<sys:String x:Key="LOCBottomBarDefault">Фильтровая панель по умолчанию</sys:String>
+<sys:String x:Key="LOCBottomBar2">Фильтровая панель 2</sys:String>
+<sys:String x:Key="LOCBottomBar3">Фильтровая панель 3</sys:String>
+<sys:String x:Key="LOCBottomBar4">Фильтровая панель 4</sys:String>
+<sys:String x:Key="LOCBottomBar5">Фильтровая панель 5</sys:String>
+<sys:String x:Key="LOCBottomBar6">Фильтровая панель 6</sys:String>
+<sys:String x:Key="LOCBottomBar7">Фильтровая панель 7</sys:String>
+<sys:String x:Key="LOCBottomBar8">Фильтровая панель 8</sys:String>
+<sys:String x:Key="LOCBottomBar9">Фильтровая панель 9</sys:String>
+<sys:String x:Key="LOCBottomBar10">Фильтровая панель 10</sys:String>
+<sys:String x:Key="LOCSourceLogoOnMainView">Логотип источника на главном экране</sys:String>
+<sys:String x:Key="LOCSourceLogoOnDetailsView">Логотип источника на экране деталей</sys:String>
+<sys:String x:Key="LOCGenresNameOnMainView">Жанры игры на главном экране</sys:String>
+<sys:String x:Key="LOCFilterNameOnMainView">Имя фильтра на главном экране</sys:String>
+<sys:String x:Key="LOCAgeRatingOnMainView">Возрастной рейтинг на главном экране</sys:String>
+<sys:String x:Key="LOCTrailerOnGameDetails">Трейлер на экране деталей</sys:String>
+<sys:String x:Key="LOCCoverOnGameDetails">Обложка игры на экране деталей</sys:String>
+
+</ResourceDictionary>

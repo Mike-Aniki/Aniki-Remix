@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+<sys:String x:Key="LOCViewStyle">Estil</sys:String>
+<sys:String x:Key="LOCDefault">Per defecte</sys:String>
+<sys:String x:Key="LOCSteamBanner">Banner de Steam</sys:String>
+<sys:String x:Key="LOCTrailerOnmainview">Tràiler a la vista principal</sys:String>
+<sys:String x:Key="LOCBottomBar">Barra de filtre</sys:String>
+<sys:String x:Key="LOCBottomBarDefault">Barra de filtre per defecte</sys:String>
+<sys:String x:Key="LOCBottomBar2">Barra de filtre 2</sys:String>
+<sys:String x:Key="LOCBottomBar3">Barra de filtre 3</sys:String>
+<sys:String x:Key="LOCBottomBar4">Barra de filtre 4</sys:String>
+<sys:String x:Key="LOCBottomBar5">Barra de filtre 5</sys:String>
+<sys:String x:Key="LOCBottomBar6">Barra de filtre 6</sys:String>
+<sys:String x:Key="LOCBottomBar7">Barra de filtre 7</sys:String>
+<sys:String x:Key="LOCBottomBar8">Barra de filtre 8</sys:String>
+<sys:String x:Key="LOCBottomBar9">Barra de filtre 9</sys:String>
+<sys:String x:Key="LOCBottomBar10">Barra de filtre 10</sys:String>
+<sys:String x:Key="LOCSourceLogoOnMainView">Logo de la font a la vista principal</sys:String>
+<sys:String x:Key="LOCSourceLogoOnDetailsView">Logo de la font a la vista de detalls</sys:String>
+<sys:String x:Key="LOCGenresNameOnMainView">Gèneres del joc a la vista principal</sys:String>
+<sys:String x:Key="LOCFilterNameOnMainView">Nom del filtre a la vista principal</sys:String>
+<sys:String x:Key="LOCAgeRatingOnMainView">Classificació per edat a la vista principal</sys:String>
+<sys:String x:Key="LOCTrailerOnGameDetails">Tràiler a la vista de detalls</sys:String>
+<sys:String x:Key="LOCCoverOnGameDetails">Caràtula del joc a la vista de detalls</sys:String>
+
+</ResourceDictionary>
